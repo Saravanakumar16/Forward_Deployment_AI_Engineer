@@ -1,0 +1,14 @@
+[
+  {
+    "invoice_id": "INV-101",
+    "vendor": "ABC Ltd",
+    "amount": 85000,
+    "status": "PENDING"
+  },
+  {
+    "invoice_id": "INV-102",
+    "vendor": "XYZ Corp",
+    "amount": 142500,
+    "status": "PENDING"
+  }
+]
