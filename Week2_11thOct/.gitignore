@@ -1,0 +1,7 @@
+   # Secrets: never upload passwords
+   .env
+
+   # Python virtual environment and cache
+   .venv/
+   venv/
+   __pycache__/
