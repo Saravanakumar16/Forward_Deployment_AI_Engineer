@@ -1,0 +1,25 @@
+import os
+import psycopg
+from dotenv import load_dotenv
+
+load_dotenv()
+db_url = os.environ.get("DATABASE_URL")
+if not db_url:
+    raise SystemExit("DATABASE_URL is not set")
+
+with psycopg.connect(db_url) as conn:
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            UPDATE googlepay
+            SET status = %s, amount = %s
+            WHERE transaction_id = %s
+            RETURNING *
+            """,
+            ("FAILED", 90000.00, "TXN-102"),
+        )
+        updated = cur.fetchone()
+        if updated:
+            print("Updated:", updated)
+        else:
+            print("No row found with that transaction_id")
