@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Encounter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="window">
+    <header class="title-bar">
+      <h1>Diabetes Patient Management</h1>
+    </header>
+
+    <!-- ===== Update form ===== -->
+    <section id="update-section" class="content">
+      <h2>
+        Update Care Intervention
+        <a href="index.html" class="link-btn back-link">&#8249; Back to Search</a>
+      </h2>
+
+      <form id="update-form">
+        <div class="field">
+          <label for="encounter_id">Encounter ID</label>
+          <div class="inline-input">
+            <input type="number" id="encounter_id" name="encounter_id" min="1" required>
+            <button type="button" class="btn-clear" id="load-btn">Load</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="patient_nbr">Patient Number</label>
+          <input type="text" id="patient_nbr" readonly>
+        </div>
+
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status" name="status" required></select>
+          <small class="hint" id="status-hint"></small>
+        </div>
+
+        <div class="field">
+          <label for="assigned_to">Assigned To</label>
+          <input type="text" id="assigned_to" name="assigned_to" maxlength="100" placeholder="e.g. Care Team A">
+          <small class="hint">Required once the status moves past PENDING_REVIEW</small>
+        </div>
+
+        <div class="field full">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" maxlength="2000" rows="3" placeholder="What was done / next step"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-add" id="update-btn">
+            Update <span class="chevron" aria-hidden="true">&#8250;</span>
+          </button>
+        </div>
+      </form>
+
+      <p id="message" class="message" role="status"></p>
+    </section>
+
+    <!-- ===== Latest status + history for THIS encounter only ===== -->
+    <section id="status-section" class="content list-section" hidden>
+      <h2>Latest Intervention Status</h2>
+
+      <div class="detail-head">
+        <div><div class="muted">Encounter</div><div class="big" id="s-encounter">-</div></div>
+        <div><div class="muted">Risk</div><div class="big" id="s-risk">-</div></div>
+        <div><div class="muted">Status</div><div class="big" id="s-status">-</div></div>
+        <div><div class="muted">Assigned To</div><div class="big" id="s-assigned">-</div></div>
+      </div>
+
+      <p class="status-message" id="s-message"></p>
+
+      <dl class="detail-grid">
+        <dt>Notes</dt><dd id="s-notes">-</dd>
+        <dt>Added to Queue</dt><dd id="s-created">-</dd>
+        <dt>Last Updated</dt><dd id="s-updated">-</dd>
+      </dl>
+
+      <h3 class="sub-heading">Update History</h3>
+      <div class="table-wrap">
+        <table id="history-table">
+          <thead>
+            <tr>
+              <th>Changed At</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Assigned To</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="history-list"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const API = "http://127.0.0.1:8000";
+
+    // Workflow order - status can stay the same or move forward, never back
+    const STATUS_ORDER = ["PENDING_REVIEW", "ASSIGNED", "CONTACTED", "FOLLOW_UP_SCHEDULED", "CLOSED"];
+
+    const form = document.getElementById("update-form");
+    const encounterInput = document.getElementById("encounter_id");
+    const patientInput = document.getElementById("patient_nbr");
+    const statusSelect = document.getElementById("status");
+    const statusHint = document.getElementById("status-hint");
+    const assignedInput = document.getElementById("assigned_to");
+    const notesInput = document.getElementById("notes");
+    const updateBtn = document.getElementById("update-btn");
+    const message = document.getElementById("message");
+    const statusSection = document.getElementById("status-section");
+
+    let current = null;   // latest intervention status from the API
+
+    // ---------- helpers ----------
+    function esc(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    function formatDate(value) {
+      return value ? new Date(value).toLocaleString() : "-";
+    }
+
+    function statusBadge(status) {
+      if (!status) return `<span class="status-badge none">NOT IN QUEUE</span>`;
+      return `<span class="status-badge ${status.toLowerCase()}">${esc(status.replace(/_/g, " "))}</span>`;
+    }
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = "message " + (type || "");
+    }
+
+    async function errorText(response) {
+      const body = await response.json().catch(() => ({}));
+      if (typeof body.detail === "string") return body.detail;
+      if (Array.isArray(body.detail)) return body.detail.map((d) => d.msg).join("; ");
+      return `HTTP ${response.status}`;
+    }
+
+    function setFormEnabled(enabled) {
+      [statusSelect, assignedInput, notesInput, updateBtn].forEach((el) => (el.disabled = !enabled));
+    }
+
+    // ---------- API calls ----------
+    async function getInterventionStatus(encounterId) {
+      const response = await fetch(`${API}/encounters/${encounterId}/intervention-status`);
+      if (!response.ok) throw new Error(await errorText(response));
+      return response.json();
+    }
+
+    // Same call as 06_update_intervention.ts -> PATCH /interventions/{encounter_id}
+    async function updateIntervention(encounterId, update) {
+      const response = await fetch(`${API}/interventions/${encounterId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(update),
+      });
+      if (!response.ok) throw new Error(await errorText(response));
+      return response.json();
+    }
+
+    // ---------- status dropdown follows the workflow ----------
+    function fillStatusOptions(currentStatus) {
+      const start = STATUS_ORDER.indexOf(currentStatus);
+      statusSelect.innerHTML = STATUS_ORDER
+        .map((s, i) => {
+          const allowed = i >= start;
+          const label = s.replace(/_/g, " ") + (s === currentStatus ? " (current)" : "");
+          return `<option value="${s}" ${allowed ? "" : "disabled"}>${label}</option>`;
+        })
+        .join("");
+      statusSelect.value = currentStatus;
+
+      if (currentStatus === "CLOSED") {
+        statusHint.textContent = "This case is CLOSED and can no longer be changed.";
+      } else {
+        const next = STATUS_ORDER.slice(start + 1).join(" → ");
+        statusHint.textContent = `Can stay ${currentStatus} or move forward to: ${next}`;
+      }
+    }
+
+    // ---------- show the latest status + history ----------
+    function renderStatus(s) {
+      statusSection.hidden = false;
+      document.getElementById("s-encounter").textContent = s.encounter_id;
+      document.getElementById("s-risk").innerHTML =
+        `${s.risk_score} <span class="badge ${s.risk_level.toLowerCase()}">${esc(s.risk_level)}</span>`;
+      document.getElementById("s-status").innerHTML = statusBadge(s.status);
+      document.getElementById("s-assigned").textContent = s.assigned_to || "-";
+      document.getElementById("s-message").textContent = s.message;
+      document.getElementById("s-notes").textContent = s.notes || "-";
+      document.getElementById("s-created").textContent = formatDate(s.created_at);
+      document.getElementById("s-updated").textContent = formatDate(s.updated_at);
+
+      const rows = [...s.history].reverse();   // newest first
+      document.getElementById("history-list").innerHTML = rows.length
+        ? rows.map((h, i) => `
+            <tr class="${i === 0 && justUpdated ? "new-row" : ""}">
+              <td>${formatDate(h.changed_at)}</td>
+              <td>${statusBadge(h.old_status)}</td>
+              <td>${statusBadge(h.new_status)}</td>
+              <td>${esc(h.assigned_to) || "-"}</td>
+              <td class="wrap">${esc(h.notes) || "-"}</td>
+            </tr>`).join("")
+        : `<tr><td colspan="5" class="empty">No updates yet</td></tr>`;
+    }
+
+    let justUpdated = false;
+
+    // ---------- load one encounter ----------
+    async function loadEncounter(encounterId) {
+      showMessage("Loading…");
+      setFormEnabled(false);
+      try {
+        current = await getInterventionStatus(encounterId);
+        encounterInput.value = current.encounter_id;
+        patientInput.value = current.patient_nbr;
+        document.title = `Update Encounter ${current.encounter_id}`;
+
+        if (!current.in_care_queue) {
+          // LOW risk or expired/hospice: there is no intervention to update
+          statusSelect.innerHTML = `<option>NOT IN QUEUE</option>`;
+          statusHint.textContent = "";
+          assignedInput.value = "";
+          notesInput.value = "";
+          showMessage(current.message + " - nothing to update.", "error");
+        } else {
+          fillStatusOptions(current.status);
+          assignedInput.value = current.assigned_to || "";
+          notesInput.value = current.notes || "";
+          setFormEnabled(current.status !== "CLOSED");
+          showMessage("");
+        }
+        renderStatus(current);
+      } catch (error) {
+        console.error(error);
+        current = null;
+        statusSection.hidden = true;
+        statusSelect.innerHTML = "";
+        const hint = error.message === "Failed to fetch"
+          ? " - is the API running on http://127.0.0.1:8000?"
+          : error.message === "Not Found"
+            ? " - your main.py has no /encounters/{id}/intervention-status route. Restart uvicorn with the latest main.py."
+            : "";
+        showMessage("Could not load encounter: " + error.message + hint, "error");
+      }
+    }
+
+    // ---------- Update button ----------
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!current || !current.in_care_queue) return;
+
+      const newStatus = statusSelect.value;
+      const assignedTo = assignedInput.value.trim();
+      const notes = notesInput.value.trim();
+
+      // Same rules as service.py, checked here first for a friendlier message
+      if (STATUS_ORDER.indexOf(newStatus) < STATUS_ORDER.indexOf(current.status)) {
+        showMessage(`Status cannot move backwards from ${current.status} to ${newStatus}.`, "error");
+        return;
+      }
+      if (newStatus !== "PENDING_REVIEW" && !assignedTo) {
+        showMessage(`Assigned To is required when status is ${newStatus}.`, "error");
+        assignedInput.focus();
+        return;
+      }
+      if (newStatus === current.status && assignedTo === (current.assigned_to || "") && notes === (current.notes || "")) {
+        showMessage("Nothing changed - edit the status, assigned to or notes first.", "error");
+        return;
+      }
+
+      updateBtn.disabled = true;
+      showMessage("Saving…");
+      try {
+        await updateIntervention(current.encounter_id, {
+          status: newStatus,
+          assigned_to: assignedTo || null,
+          notes: notes || null,
+        });
+        justUpdated = true;
+        await loadEncounter(current.encounter_id);   // show the latest status from the database
+        showMessage(`Encounter ${current.encounter_id} updated to ${current.status}.`, "success");
+      } catch (error) {
+        console.error(error);
+        showMessage("Update failed: " + error.message, "error");
+        updateBtn.disabled = false;
+      } finally {
+        justUpdated = false;
+      }
+    });
+
+    // ---------- Load a different encounter by typing its ID ----------
+    function loadFromInput() {
+      const id = encounterInput.value.trim();
+      if (!/^\d+$/.test(id)) {
+        showMessage("Enter a valid Encounter ID.", "error");
+        return;
+      }
+      history.replaceState(null, "", `?encounter_id=${id}`);
+      loadEncounter(id);
+    }
+
+    document.getElementById("load-btn").addEventListener("click", loadFromInput);
+    encounterInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); loadFromInput(); }
+    });
+
+    // ---------- Opened from the search page: update_encounter.html?encounter_id=123 ----------
+    window.addEventListener("DOMContentLoaded", () => {
+      setFormEnabled(false);
+      const params = new URLSearchParams(location.search);
+      const id = params.get("encounter_id");
+      const patientNbr = params.get("patient_nbr");
+      if (id && /^\d+$/.test(id)) {
+        // Fill both boxes straight from the link, before the API answers
+        encounterInput.value = id;
+        if (patientNbr && /^\d+$/.test(patientNbr)) patientInput.value = patientNbr;
+        loadEncounter(id);
+      } else {
+        showMessage("Enter an Encounter ID and click Load, or open one from the search page.");
+        encounterInput.focus();
+      }
+    });
+  </script>
+</body>
+</html>
