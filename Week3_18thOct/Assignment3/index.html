@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Patient</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="window">
+    <header class="title-bar">
+      <h1>Diabetes Patient Management</h1>
+    </header>
+
+    <!-- ===== Search form ===== -->
+    <section id="patient-search-section" class="content">
+      <h2>Search Patient</h2>
+
+      <form id="search-form">
+        <div class="field">
+          <label for="patient_nbr">Patient Number</label>
+          <input type="number" id="patient_nbr" name="patient_nbr" min="1" placeholder="e.g. 8222157">
+        </div>
+
+        <div class="field">
+          <label for="risk_level">Risk Level</label>
+          <select id="risk_level" name="risk_level">
+            <option value="">Any</option>
+            <option value="LOW">LOW</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="HIGH">HIGH</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="risk_score">Risk Score</label>
+          <input type="number" id="risk_score" name="risk_score" min="0" max="8" placeholder="0 - 8">
+        </div>
+
+        <div class="actions">
+          <button type="reset" class="btn-clear" id="clear-btn">Clear</button>
+          <button type="submit" class="btn-add" id="search-btn">
+            Search <span class="chevron" aria-hidden="true">&#8250;</span>
+          </button>
+        </div>
+      </form>
+
+      <p id="message" class="message" role="status"></p>
+    </section>
+
+    <!-- ===== Results table ===== -->
+    <section id="patient-search-results" class="content list-section">
+      <h2>Results <span id="result-count" class="count"></span></h2>
+      <div class="table-wrap">
+        <table id="encounter-table">
+          <thead>
+            <tr>
+              <th>Encounter ID</th>
+              <th>Patient Number</th>
+              <th>Age</th>
+              <th>Readmitted</th>
+              <th>Risk Score</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody id="encounter-list">
+            <tr><td colspan="6" class="empty">Enter a patient number, risk level or risk score and click Search.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const API_URL = "http://127.0.0.1:8000/patients/search";
+
+    const form = document.getElementById("search-form");
+    const encounterList = document.getElementById("encounter-list");
+    const resultCount = document.getElementById("result-count");
+    const message = document.getElementById("message");
+    const searchBtn = document.getElementById("search-btn");
+
+    // Same logic as searchPatients() in 11_search_patients.ts
+    async function searchPatients(filters, limit = 100, offset = 0) {
+      const params = new URLSearchParams();
+      if (filters.patient_nbr) params.append("patient_nbr", filters.patient_nbr);
+      if (filters.risk_score !== "") params.append("risk_score", filters.risk_score);
+      if (filters.risk_level) params.append("risk_level", filters.risk_level);
+      params.append("limit", limit);
+      params.append("offset", offset);
+
+      const response = await fetch(`${API_URL}?${params.toString()}`);
+      if (!response.ok) {
+        const body = await response.json().catch(() => ({}));
+        const detail = typeof body.detail === "string"
+          ? body.detail
+          : (body.detail?.[0]?.msg ?? `HTTP ${response.status}`);
+        throw new Error(detail);
+      }
+      return response.json();
+    }
+
+    function showEmpty(text, isError) {
+      encounterList.innerHTML =
+        `<tr><td colspan="6" class="empty ${isError ? "error" : ""}">${text}</td></tr>`;
+    }
+
+    function createRow(e) {
+      const level = (e.risk_level ?? "").toLowerCase();
+      return `
+        <tr>
+          <td><a class="encounter-link" href="update_encounter.html?encounter_id=${e.encounter_id}&patient_nbr=${e.patient_nbr}">${e.encounter_id}</a></td>
+          <td>${e.patient_nbr}</td>
+          <td>${e.age}</td>
+          <td>${e.readmitted}</td>
+          <td>${e.risk_score}</td>
+          <td><span class="badge ${level}">${e.risk_level}</span></td>
+        </tr>`;
+    }
+
+    // ---- Runs when "Search" is clicked ----
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      message.textContent = "";
+
+      const filters = {
+        patient_nbr: document.getElementById("patient_nbr").value.trim(),
+        risk_level: document.getElementById("risk_level").value,
+        risk_score: document.getElementById("risk_score").value.trim(),
+      };
+
+      // At least one filter is required
+      if (!filters.patient_nbr && !filters.risk_level && filters.risk_score === "") {
+        message.textContent = "Enter at least one: Patient Number, Risk Level or Risk Score.";
+        message.className = "message error";
+        return;
+      }
+
+      // Remember the search so "Back to Search" can show the same results
+      try { sessionStorage.setItem("lastSearch", JSON.stringify(filters)); } catch (e) {}
+
+      searchBtn.disabled = true;
+      resultCount.textContent = "";
+      showEmpty("Searching…", false);
+
+      try {
+        const data = await searchPatients(filters);
+        console.log(data);
+
+        if (data.total === 0) {
+          showEmpty("No match", false);
+          resultCount.textContent = "(0)";
+          return;
+        }
+
+        encounterList.innerHTML = data.items.map(createRow).join("");
+        resultCount.textContent = data.total > data.items.length
+          ? `(showing ${data.items.length} of ${data.total})`
+          : `(${data.total})`;
+      } catch (error) {
+        console.error(error);
+        showEmpty("Search failed: " + error.message, true);
+      } finally {
+        searchBtn.disabled = false;
+      }
+    });
+
+    // Coming back from the update screen: re-run the last search
+    window.addEventListener("DOMContentLoaded", () => {
+      let last = null;
+      try { last = JSON.parse(sessionStorage.getItem("lastSearch")); } catch (e) {}
+      if (last) {
+        document.getElementById("patient_nbr").value = last.patient_nbr || "";
+        document.getElementById("risk_level").value = last.risk_level || "";
+        document.getElementById("risk_score").value = last.risk_score || "";
+        form.requestSubmit();
+      }
+    });
+
+    // Clear also resets the table
+    form.addEventListener("reset", () => {
+      try { sessionStorage.removeItem("lastSearch"); } catch (e) {}
+      message.textContent = "";
+      resultCount.textContent = "";
+      showEmpty("Enter a patient number, risk level or risk score and click Search.", false);
+    });
+  </script>
+</body>
+</html>
