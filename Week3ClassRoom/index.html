@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabetes Patient Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="window">
+    <header class="title-bar">
+      <h1>Diabetes Patient Management</h1>
+    </header>
+
+    <!-- ===== Add encounter form ===== -->
+    <section id="patient-encounter-form-section" class="content">
+      <h2>Add Patient Encounter</h2>
+
+      <form id="encounter-form">
+        <div class="field">
+          <label for="encounter_id">Encounter ID</label>
+          <input type="number" id="encounter_id" name="encounter_id" required>
+        </div>
+
+        <div class="field">
+          <label for="patient_nbr">Patient Number</label>
+          <input type="number" id="patient_nbr" name="patient_nbr" required>
+        </div>
+
+        <div class="field">
+          <label for="age">Age</label>
+          <select id="age" name="age" required>
+            <option value="" disabled selected>Age Group</option>
+            <option value="[0-10)">[0-10)</option>
+            <option value="[10-20)">[10-20)</option>
+            <option value="[20-30)">[20-30)</option>
+            <option value="[30-40)">[30-40)</option>
+            <option value="[40-50)">[40-50)</option>
+            <option value="[50-60)">[50-60)</option>
+            <option value="[60-70)">[60-70)</option>
+            <option value="[70-80)">[70-80)</option>
+            <option value="[80-90)">[80-90)</option>
+            <option value="[90-100)">[90-100)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="time_in_hospital">Time in Hospital (days)</label>
+          <input type="number" id="time_in_hospital" name="time_in_hospital" min="1" max="14" required>
+        </div>
+
+        <div class="field">
+          <label for="number_inpatient">Number of In-Patient Visits</label>
+          <input type="number" id="number_inpatient" name="number_inpatient" min="0" required>
+        </div>
+
+        <div class="field">
+          <label for="number_emergency">Number of Emergency Visits</label>
+          <input type="number" id="number_emergency" name="number_emergency" min="0" required>
+        </div>
+
+        <div class="field">
+          <label for="number_outpatient">Number of Out-Patient Visits</label>
+          <input type="number" id="number_outpatient" name="number_outpatient" min="0" required>
+        </div>
+
+        <div class="field">
+          <label for="num_medications">Number of Medications</label>
+          <input type="number" id="num_medications" name="num_medications" min="0" required>
+        </div>
+
+        <div class="field">
+          <label for="num_lab_procedures">Number of Lab Procedures</label>
+          <input type="number" id="num_lab_procedures" name="num_lab_procedures" min="0" required>
+        </div>
+
+        <div class="field">
+          <label for="num_procedures">Number of Procedures</label>
+          <input type="number" id="num_procedures" name="num_procedures" min="0" required>
+        </div>
+
+        <div class="field">
+          <label for="admission_type_id">Admission Type ID</label>
+          <input type="number" id="admission_type_id" name="admission_type_id" min="1" required>
+        </div>
+
+        <div class="field">
+          <label for="discharge_disposition_id">Discharge Disposition ID</label>
+          <input type="number" id="discharge_disposition_id" name="discharge_disposition_id" min="1" required>
+        </div>
+
+        <div class="field">
+          <label for="readmitted">Readmitted</label>
+          <select id="readmitted" name="readmitted" required>
+            <option value="NO">NO</option>
+            <option value="<30">&lt;30</option>
+            <option value=">30">&gt;30</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-add" id="add-btn">
+            Add Encounter <span class="chevron" aria-hidden="true">&#8250;</span>
+          </button>
+        </div>
+      </form>
+
+      <p id="message" class="message" role="status"></p>
+    </section>
+
+    <!-- ===== Encounter list ===== -->
+    <section id="patient-encounter-list" class="content list-section">
+      <h2>Encounters</h2>
+      <div class="table-wrap">
+        <table id="encounter-table">
+          <thead>
+            <tr>
+              <th>Encounter ID</th>
+              <th>Patient Number</th>
+              <th>Age</th>
+              <th>Readmitted</th>
+              <th>Risk Score</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody id="encounter-list">
+            <tr><td colspan="6" class="empty">Loading encounters…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Same API your 02_list_encounters.ts and 10_create_encounter.ts call
+    const API_URL = "http://127.0.0.1:8000/encounters";
+
+    const form = document.getElementById("encounter-form");
+    const encounterList = document.getElementById("encounter-list");
+    const message = document.getElementById("message");
+    const addBtn = document.getElementById("add-btn");
+
+    // ---- Same logic as getEncounters() in 02_list_encounters.ts ----
+    async function getEncounters(limit, offset) {
+      const response = await fetch(`${API_URL}?limit=${limit}&offset=${offset}`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const data = await response.json();
+
+      // Keep only the 6 fields to show
+      const items = data.items.map((e) => ({
+        encounter_id: e.encounter_id,
+        patient_nbr: e.patient_nbr,
+        age: e.age,
+        readmitted: e.readmitted,
+        risk_score: e.risk_score,
+        risk_level: e.risk_level,
+      }));
+
+      return { total: data.total, limit: data.limit, offset: data.offset, items };
+    }
+
+    // Build one table row
+    function createRow(e) {
+      const level = (e.risk_level ?? "").toString().toLowerCase();
+      const score = typeof e.risk_score === "number" ? e.risk_score.toFixed(2) : (e.risk_score ?? "-");
+      return `
+        <tr>
+          <td>${e.encounter_id ?? "-"}</td>
+          <td>${e.patient_nbr ?? "-"}</td>
+          <td>${e.age ?? "-"}</td>
+          <td>${e.readmitted ?? "-"}</td>
+          <td>${score}</td>
+          <td><span class="badge ${level}">${e.risk_level ?? "-"}</span></td>
+        </tr>`;
+    }
+
+    // Load encounters into the table
+    async function loadPatients() {
+      try {
+        const data = await getEncounters(20, 0);
+        console.log(data);
+
+        if (data.items.length === 0) {
+          encounterList.innerHTML = `<tr><td colspan="6" class="empty">No encounters found.</td></tr>`;
+          return;
+        }
+        encounterList.innerHTML = data.items.map(createRow).join("");
+      } catch (error) {
+        console.error(error);
+        encounterList.innerHTML =
+          `<tr><td colspan="6" class="empty error">Could not load encounters. Is the API running on port 8000?</td></tr>`;
+      }
+    }
+
+    // Send a new encounter to the API
+    async function createEncounter(encounter) {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(encounter),
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(`HTTP ${response.status}: ${detail}`);
+      }
+      return response.json();
+    }
+
+    function showMessage(text, isError) {
+      message.textContent = text;
+      message.className = "message " + (isError ? "error" : "success");
+    }
+
+    // ---- Runs when "Add Encounter" is clicked ----
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const f = new FormData(form);
+      const encounter = {
+        encounter_id: Number(f.get("encounter_id")),
+        patient_nbr: Number(f.get("patient_nbr")),
+        age: f.get("age"),
+        time_in_hospital: Number(f.get("time_in_hospital")),
+        number_inpatient: Number(f.get("number_inpatient")),
+        number_emergency: Number(f.get("number_emergency")),
+        number_outpatient: Number(f.get("number_outpatient")),
+        num_medications: Number(f.get("num_medications")),
+        num_lab_procedures: Number(f.get("num_lab_procedures")),
+        num_procedures: Number(f.get("num_procedures")),
+        admission_type_id: Number(f.get("admission_type_id")),
+        discharge_disposition_id: Number(f.get("discharge_disposition_id")),
+        readmitted: f.get("readmitted"),
+      };
+
+      addBtn.disabled = true;
+      try {
+        const saved = await createEncounter(encounter);
+        console.log("Created:", saved);
+
+        // Show the new encounter at the top of the table
+        // (uses risk_score / risk_level returned by the API)
+        const newRow = { ...encounter, ...saved };
+        const empty = encounterList.querySelector(".empty");
+        if (empty) encounterList.innerHTML = "";
+        encounterList.insertAdjacentHTML("afterbegin", createRow(newRow));
+        encounterList.firstElementChild.classList.add("new-row");
+
+        showMessage(`Encounter ${encounter.encounter_id} added.`, false);
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        showMessage("Could not add encounter: " + error.message, true);
+      } finally {
+        addBtn.disabled = false;
+      }
+    });
+
+    // Load patients when the page is loaded
+    window.addEventListener("DOMContentLoaded", () => {
+      loadPatients();
+    });
+  </script>
+</body>
+</html>
