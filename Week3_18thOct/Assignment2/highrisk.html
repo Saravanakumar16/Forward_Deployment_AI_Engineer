@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High Risk Patients</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="window">
+    <header class="title-bar">
+      <h1>Diabetes Patient Management</h1>
+    </header>
+
+    <!-- ===== Filters ===== -->
+    <section id="high-risk-search-section" class="content">
+      <h2>High Risk Patients</h2>
+
+      <form id="high-risk-form">
+        <div class="field">
+          <label for="patient_nbr">Patient Number (optional)</label>
+          <input type="number" id="patient_nbr" name="patient_nbr" min="1" placeholder="All patients">
+        </div>
+
+        <div class="field">
+          <label for="status">Care Status (optional)</label>
+          <select id="status" name="status">
+            <option value="">Any</option>
+            <option value="PENDING_REVIEW">PENDING_REVIEW</option>
+            <option value="ASSIGNED">ASSIGNED</option>
+            <option value="CONTACTED">CONTACTED</option>
+            <option value="FOLLOW_UP_SCHEDULED">FOLLOW_UP_SCHEDULED</option>
+            <option value="CLOSED">CLOSED</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="reset" class="btn-clear">Clear</button>
+          <button type="submit" class="btn-add" id="search-btn">
+            Search <span class="chevron" aria-hidden="true">&#8250;</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== High-risk list ===== -->
+    <section id="high-risk-results" class="content list-section">
+      <h2>Results <span id="result-count" class="count"></span></h2>
+      <div class="table-wrap">
+        <table id="encounter-table">
+          <thead>
+            <tr>
+              <th>Encounter ID</th>
+              <th>Patient Number</th>
+              <th>Age</th>
+              <th>Risk Score</th>
+              <th>Risk Level</th>
+              <th>Care Status</th>
+            </tr>
+          </thead>
+          <tbody id="encounter-list">
+            <tr><td colspan="6" class="empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <button type="button" class="btn-clear" id="prev-btn">&#8249; Previous</button>
+        <span id="page-info"></span>
+        <button type="button" class="btn-clear" id="next-btn">Next &#8250;</button>
+      </div>
+    </section>
+
+    <!-- ===== Intervention status for the clicked encounter ===== -->
+    <section id="intervention-section" class="content list-section" hidden>
+      <h2>
+        Care Intervention Status
+        <button type="button" class="link-btn" id="close-detail">Close &#10005;</button>
+      </h2>
+      <div id="intervention-detail"></div>
+    </section>
+  </main>
+
+  <script>
+    const API = "http://127.0.0.1:8000";
+    const PAGE_SIZE = 25;
+    let offset = 0;
+    let total = 0;
+
+    const form = document.getElementById("high-risk-form");
+    const list = document.getElementById("encounter-list");
+    const resultCount = document.getElementById("result-count");
+    const pageInfo = document.getElementById("page-info");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const detailSection = document.getElementById("intervention-section");
+    const detail = document.getElementById("intervention-detail");
+
+    // Notes and names come from the database, so escape them before showing
+    function esc(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    function formatDate(value) {
+      return value ? new Date(value).toLocaleString() : "-";
+    }
+
+    function statusBadge(status) {
+      if (!status) return `<span class="status-badge none">NOT IN QUEUE</span>`;
+      return `<span class="status-badge ${status.toLowerCase()}">${esc(status.replace(/_/g, " "))}</span>`;
+    }
+
+    async function getJson(url) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        const body = await response.json().catch(() => ({}));
+        const msg = typeof body.detail === "string"
+          ? body.detail
+          : (body.detail?.[0]?.msg ?? `HTTP ${response.status}`);
+        throw new Error(msg);
+      }
+      return response.json();
+    }
+
+    // ---- 1. List HIGH-risk patients ----
+    async function loadHighRisk() {
+      const params = new URLSearchParams({ limit: PAGE_SIZE, offset });
+      const patientNbr = document.getElementById("patient_nbr").value.trim();
+      const status = document.getElementById("status").value;
+      if (patientNbr) params.append("patient_nbr", patientNbr);
+      if (status) params.append("status", status);
+
+      list.innerHTML = `<tr><td colspan="6" class="empty">Loading…</td></tr>`;
+      try {
+        const data = await getJson(`${API}/patients/high-risk?${params}`);
+        total = data.total;
+
+        if (total === 0) {
+          list.innerHTML = `<tr><td colspan="6" class="empty">No match</td></tr>`;
+        } else {
+          list.innerHTML = data.items.map((e) => `
+            <tr>
+              <td><a href="#${e.encounter_id}" class="encounter-link">${e.encounter_id}</a></td>
+              <td>${e.patient_nbr}</td>
+              <td>${esc(e.age)}</td>
+              <td>${e.risk_score}</td>
+              <td><span class="badge high">${esc(e.risk_level)}</span></td>
+              <td>${statusBadge(e.status)}</td>
+            </tr>`).join("");
+        }
+        updatePager(data.items.length);
+      } catch (error) {
+        console.error(error);
+        total = 0;
+        updatePager(0);
+        list.innerHTML = `<tr><td colspan="6" class="empty error">Could not load: ${esc(error.message)}</td></tr>`;
+      }
+    }
+
+    function updatePager(shown) {
+      resultCount.textContent = `(${total})`;
+      pageInfo.textContent = total === 0 ? "" : `${offset + 1}–${offset + shown} of ${total}`;
+      prevBtn.disabled = offset === 0;
+      nextBtn.disabled = offset + PAGE_SIZE >= total;
+    }
+
+    // ---- 2. Fetch the intervention status for one encounter ----
+    async function showInterventionStatus(encounterId) {
+      detailSection.hidden = false;
+      detail.innerHTML = `<p class="muted">Loading encounter ${esc(encounterId)}…</p>`;
+      detailSection.scrollIntoView({ behavior: "smooth" });
+
+      try {
+        const s = await getJson(`${API}/encounters/${encodeURIComponent(encounterId)}/intervention-status`);
+
+        const reasons = s.risk_reasons.length
+          ? s.risk_reasons.map((r) => `<li>${esc(r)}</li>`).join("")
+          : "<li>No risk factors</li>";
+
+        const history = s.history.length
+          ? s.history.map((h) => `
+              <li>
+                <span class="when">${formatDate(h.changed_at)}</span>
+                ${statusBadge(h.old_status)} &rarr; ${statusBadge(h.new_status)}
+                ${h.assigned_to ? `<span class="who">${esc(h.assigned_to)}</span>` : ""}
+                ${h.notes ? `<div class="note">${esc(h.notes)}</div>` : ""}
+              </li>`).join("")
+          : `<li class="muted">No status changes yet</li>`;
+
+        detail.innerHTML = `
+          <div class="detail-head">
+            <div>
+              <div class="muted">Encounter</div>
+              <div class="big">${s.encounter_id}</div>
+            </div>
+            <div>
+              <div class="muted">Patient</div>
+              <div class="big">${s.patient_nbr}</div>
+            </div>
+            <div>
+              <div class="muted">Risk</div>
+              <div class="big">${s.risk_score} <span class="badge ${s.risk_level.toLowerCase()}">${esc(s.risk_level)}</span></div>
+            </div>
+            <div>
+              <div class="muted">Care Status</div>
+              <div class="big">${statusBadge(s.status)}</div>
+            </div>
+          </div>
+
+          <p class="status-message">${esc(s.message)}</p>
+
+          <dl class="detail-grid">
+            <dt>Age</dt><dd>${esc(s.age)}</dd>
+            <dt>Assigned To</dt><dd>${esc(s.assigned_to) || "-"}</dd>
+            <dt>Notes</dt><dd>${esc(s.notes) || "-"}</dd>
+            <dt>Added to Queue</dt><dd>${formatDate(s.created_at)}</dd>
+            <dt>Last Updated</dt><dd>${formatDate(s.updated_at)}</dd>
+          </dl>
+
+          <h3>Why this risk score</h3>
+          <ul class="reasons">${reasons}</ul>
+
+          <h3>Status History</h3>
+          <ul class="history">${history}</ul>`;
+      } catch (error) {
+        console.error(error);
+        detail.innerHTML = `<p class="message error">Could not load intervention status: ${esc(error.message)}</p>`;
+      }
+    }
+
+    // Clicking an Encounter ID changes the URL to #<id>; this reacts to it.
+    // It also means a link like high_risk.html#12345 opens that encounter directly.
+    function handleHash() {
+      const id = location.hash.slice(1);
+      if (/^\d+$/.test(id)) showInterventionStatus(id);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      offset = 0;
+      loadHighRisk();
+    });
+
+    form.addEventListener("reset", () => {
+      setTimeout(() => { offset = 0; loadHighRisk(); }, 0);
+    });
+
+    prevBtn.addEventListener("click", () => { offset = Math.max(0, offset - PAGE_SIZE); loadHighRisk(); });
+    nextBtn.addEventListener("click", () => { offset += PAGE_SIZE; loadHighRisk(); });
+
+    document.getElementById("close-detail").addEventListener("click", () => {
+      detailSection.hidden = true;
+      history.replaceState(null, "", location.pathname);
+    });
+
+    window.addEventListener("hashchange", handleHash);
+    window.addEventListener("DOMContentLoaded", () => {
+      loadHighRisk();
+      handleHash();
+    });
+  </script>
+</body>
+</html>
