@@ -1,0 +1,23 @@
+[
+ {"q": "How does a Kubernetes Deployment manage application replicas?", "relevant": ["APP-01", "APP-02"], "area": "APPLICATION"},
+ {"q": "How do I roll back a Deployment to a previous revision?", "relevant": ["APP-01"], "area": "APPLICATION"},
+ {"q": "What guarantees does a StatefulSet provide about stable network identity and ordered deployment?", "relevant": ["APP-03"], "area": "APPLICATION"},
+ {"q": "How do I run a Job on a repeating schedule using cron syntax?", "relevant": ["APP-06"], "area": "APPLICATION"},
+ {"q": "What happens to a Pod if one of its init containers fails?", "relevant": ["APP-09"], "area": "APPLICATION"},
+ {"q": "How does the Horizontal Pod Autoscaler calculate the desired number of replicas?", "relevant": ["APP-10"], "area": "APPLICATION"},
+ {"q": "How do I make sure a copy of a Pod runs on every node?", "relevant": ["APP-04"], "area": "APPLICATION"},
+ {"q": "What are PersistentVolumes and PersistentVolumeClaims?", "relevant": ["PLAT-01"], "area": "PLATFORM"},
+ {"q": "What does the reclaimPolicy of a StorageClass control?", "relevant": ["PLAT-03", "PLAT-01"], "area": "PLATFORM"},
+ {"q": "How do I take a point-in-time snapshot of a volume?", "relevant": ["PLAT-05"], "area": "PLATFORM"},
+ {"q": "How can I clone an existing PersistentVolumeClaim?", "relevant": ["PLAT-09"], "area": "PLATFORM"},
+ {"q": "What is an emptyDir volume and when is it deleted?", "relevant": ["PLAT-02", "PLAT-06"], "area": "PLATFORM"},
+ {"q": "How are volumes provisioned automatically on demand?", "relevant": ["PLAT-04", "PLAT-03"], "area": "PLATFORM"},
+ {"q": "What are recommended Kubernetes RBAC practices?", "relevant": ["SEC-01"], "area": "SECURITY"},
+ {"q": "What is the difference between the privileged, baseline and restricted pod security profiles?", "relevant": ["SEC-02"], "area": "SECURITY"},
+ {"q": "How should Secrets be protected, for example with encryption at rest and least-privilege access?", "relevant": ["SEC-03", "SEC-04"], "area": "SECURITY"},
+ {"q": "How can multiple teams safely share one cluster?", "relevant": ["SEC-05"], "area": "SECURITY"},
+ {"q": "What are the main Kubernetes components?", "relevant": ["SHARED-02", "SHARED-01"], "area": "SHARED"},
+ {"q": "What are namespaces used for?", "relevant": ["SHARED-05"], "area": "SHARED"},
+ {"q": "How do clients discover the Kubernetes API and its OpenAPI schema?", "relevant": ["SHARED-03"], "area": "SHARED"},
+ {"q": "What is the difference between an object's spec and status?", "relevant": ["SHARED-04"], "area": "SHARED"}
+]

@@ -1,0 +1,8 @@
+# Python 3.12 recommended; use a fresh .venv
+psycopg[binary]>=3.2,<4
+pgvector>=0.4,<1
+fastembed>=0.6,<1
+python-dotenv>=1,<2
+PyYAML>=6,<7
+# only needed for the optional offline stand-in embedder (EMBED_BACKEND=offline-lsa)
+scikit-learn>=1.4

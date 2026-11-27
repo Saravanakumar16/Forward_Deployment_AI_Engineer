@@ -1,0 +1,307 @@
+{
+  "repository": "https://github.com/kubernetes/website",
+  "commit": "06fb965bdd1b625352ed3d6af501b5fec1b425d4",
+  "license": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)",
+  "documents": [
+    {
+      "document_id": "APP-01",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/controllers/deployment.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+    },
+    {
+      "document_id": "APP-02",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/controllers/replicaset.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/"
+    },
+    {
+      "document_id": "APP-03",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/controllers/statefulset.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/"
+    },
+    {
+      "document_id": "APP-04",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/controllers/daemonset.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/"
+    },
+    {
+      "document_id": "APP-05",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/controllers/job.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/job/"
+    },
+    {
+      "document_id": "APP-06",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/controllers/cron-jobs.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/"
+    },
+    {
+      "document_id": "APP-07",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/pods/_index.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/pods/"
+    },
+    {
+      "document_id": "APP-08",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/pods/pod-lifecycle.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/"
+    },
+    {
+      "document_id": "APP-09",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/pods/init-containers.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/pods/init-containers/"
+    },
+    {
+      "document_id": "APP-10",
+      "category": "APPLICATION",
+      "classification": "restricted",
+      "permitted_groups": [
+        "APP_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale.md",
+      "source_url": "https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/"
+    },
+    {
+      "document_id": "PLAT-01",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/persistent-volumes.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+    },
+    {
+      "document_id": "PLAT-02",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/volumes.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/volumes/"
+    },
+    {
+      "document_id": "PLAT-03",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/storage-classes.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/storage-classes/"
+    },
+    {
+      "document_id": "PLAT-04",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/dynamic-provisioning.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/"
+    },
+    {
+      "document_id": "PLAT-05",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/volume-snapshots.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/volume-snapshots/"
+    },
+    {
+      "document_id": "PLAT-06",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/ephemeral-volumes.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/"
+    },
+    {
+      "document_id": "PLAT-07",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/projected-volumes.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/projected-volumes/"
+    },
+    {
+      "document_id": "PLAT-08",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/storage-capacity.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/storage-capacity/"
+    },
+    {
+      "document_id": "PLAT-09",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/volume-pvc-datasource.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/"
+    },
+    {
+      "document_id": "PLAT-10",
+      "category": "PLATFORM",
+      "classification": "restricted",
+      "permitted_groups": [
+        "PLATFORM_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/storage/storage-limits.md",
+      "source_url": "https://kubernetes.io/docs/concepts/storage/storage-limits/"
+    },
+    {
+      "document_id": "SEC-01",
+      "category": "SECURITY",
+      "classification": "restricted",
+      "permitted_groups": [
+        "SECURITY_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/security/rbac-good-practices.md",
+      "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/"
+    },
+    {
+      "document_id": "SEC-02",
+      "category": "SECURITY",
+      "classification": "restricted",
+      "permitted_groups": [
+        "SECURITY_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/security/pod-security-standards.md",
+      "source_url": "https://kubernetes.io/docs/concepts/security/pod-security-standards/"
+    },
+    {
+      "document_id": "SEC-03",
+      "category": "SECURITY",
+      "classification": "restricted",
+      "permitted_groups": [
+        "SECURITY_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/security/secrets-good-practices.md",
+      "source_url": "https://kubernetes.io/docs/concepts/security/secrets-good-practices/"
+    },
+    {
+      "document_id": "SEC-04",
+      "category": "SECURITY",
+      "classification": "restricted",
+      "permitted_groups": [
+        "SECURITY_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/security/security-checklist.md",
+      "source_url": "https://kubernetes.io/docs/concepts/security/security-checklist/"
+    },
+    {
+      "document_id": "SEC-05",
+      "category": "SECURITY",
+      "classification": "restricted",
+      "permitted_groups": [
+        "SECURITY_ENG"
+      ],
+      "source_path": "content/en/docs/concepts/security/multi-tenancy.md",
+      "source_url": "https://kubernetes.io/docs/concepts/security/multi-tenancy/"
+    },
+    {
+      "document_id": "SHARED-01",
+      "category": "SHARED",
+      "classification": "shared",
+      "permitted_groups": [
+        "ALL_EMPLOYEES"
+      ],
+      "source_path": "content/en/docs/concepts/overview/_index.md",
+      "source_url": "https://kubernetes.io/docs/concepts/overview/"
+    },
+    {
+      "document_id": "SHARED-02",
+      "category": "SHARED",
+      "classification": "shared",
+      "permitted_groups": [
+        "ALL_EMPLOYEES"
+      ],
+      "source_path": "content/en/docs/concepts/overview/components.md",
+      "source_url": "https://kubernetes.io/docs/concepts/overview/components/"
+    },
+    {
+      "document_id": "SHARED-03",
+      "category": "SHARED",
+      "classification": "shared",
+      "permitted_groups": [
+        "ALL_EMPLOYEES"
+      ],
+      "source_path": "content/en/docs/concepts/overview/kubernetes-api.md",
+      "source_url": "https://kubernetes.io/docs/concepts/overview/kubernetes-api/"
+    },
+    {
+      "document_id": "SHARED-04",
+      "category": "SHARED",
+      "classification": "shared",
+      "permitted_groups": [
+        "ALL_EMPLOYEES"
+      ],
+      "source_path": "content/en/docs/concepts/overview/working-with-objects/_index.md",
+      "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/"
+    },
+    {
+      "document_id": "SHARED-05",
+      "category": "SHARED",
+      "classification": "shared",
+      "permitted_groups": [
+        "ALL_EMPLOYEES"
+      ],
+      "source_path": "content/en/docs/concepts/overview/working-with-objects/namespaces.md",
+      "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/"
+    }
+  ]
+}

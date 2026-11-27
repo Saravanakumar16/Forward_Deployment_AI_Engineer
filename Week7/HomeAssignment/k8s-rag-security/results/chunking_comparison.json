@@ -1,0 +1,1112 @@
+{
+  "embedder": "BAAI/bge-small-en-v1.5",
+  "k": 5,
+  "strategies": {
+    "fixed": {
+      "params": "1000 chars, 150 overlap",
+      "structure": {
+        "chunks": 662,
+        "chunks_per_doc": 22.1,
+        "chars_avg": 977,
+        "chars_median": 1000,
+        "chars_min": 161,
+        "chars_max": 1000,
+        "chars_stdev": 115,
+        "tokens_avg": 239,
+        "tokens_max": 480,
+        "pct_over_512_tokens": 0.0,
+        "pct_under_100_chars": 0.0,
+        "overlap_configured": 150,
+        "overlap_measured_avg": 149,
+        "pct_start_at_heading": 0.5,
+        "pct_heading_context_in_embedding": 0.5,
+        "pct_mixes_sections": 63.3,
+        "pct_orphan_heading": 3.3,
+        "pct_start_mid_sentence": 82.0,
+        "pct_end_mid_sentence": 76.6,
+        "pct_split_code_block": 13.6
+      },
+      "retrieval": {
+        "hit@1": 0.905,
+        "hit@5": 1.0,
+        "MRR@5": 0.929,
+        "precision@5": 0.705
+      },
+      "per_question": [
+        {
+          "q": "How does a Kubernetes Deployment manage application replicas?",
+          "top": [
+            "APP-01",
+            "SHARED-04",
+            "APP-01",
+            "APP-01",
+            "SHARED-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I roll back a Deployment to a previous revision?",
+          "top": [
+            "APP-01",
+            "APP-01",
+            "APP-01",
+            "APP-01",
+            "APP-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What guarantees does a StatefulSet provide about stable network identity and ordered deployment?",
+          "top": [
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I run a Job on a repeating schedule using cron syntax?",
+          "top": [
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What happens to a Pod if one of its init containers fails?",
+          "top": [
+            "APP-09",
+            "APP-08",
+            "APP-08",
+            "APP-09",
+            "APP-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How does the Horizontal Pod Autoscaler calculate the desired number of replicas?",
+          "top": [
+            "APP-10",
+            "APP-10",
+            "APP-02",
+            "APP-10",
+            "APP-10"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I make sure a copy of a Pod runs on every node?",
+          "top": [
+            "APP-07",
+            "APP-07",
+            "APP-07",
+            "APP-04",
+            "APP-08"
+          ],
+          "first_relevant_rank": 4
+        },
+        {
+          "q": "What are PersistentVolumes and PersistentVolumeClaims?",
+          "top": [
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-06",
+            "PLAT-01",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What does the reclaimPolicy of a StorageClass control?",
+          "top": [
+            "PLAT-03",
+            "PLAT-01",
+            "PLAT-03",
+            "PLAT-01",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I take a point-in-time snapshot of a volume?",
+          "top": [
+            "PLAT-05",
+            "PLAT-03",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How can I clone an existing PersistentVolumeClaim?",
+          "top": [
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-09",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 4
+        },
+        {
+          "q": "What is an emptyDir volume and when is it deleted?",
+          "top": [
+            "PLAT-02",
+            "PLAT-01",
+            "PLAT-02",
+            "SEC-02",
+            "PLAT-06"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How are volumes provisioned automatically on demand?",
+          "top": [
+            "PLAT-04",
+            "PLAT-03",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are recommended Kubernetes RBAC practices?",
+          "top": [
+            "SEC-01",
+            "SEC-05",
+            "SEC-04",
+            "SEC-05",
+            "SEC-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between the privileged, baseline and restricted pod security profiles?",
+          "top": [
+            "SEC-02",
+            "SEC-02",
+            "SEC-04",
+            "SEC-02",
+            "SEC-04"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How should Secrets be protected, for example with encryption at rest and least-privilege access?",
+          "top": [
+            "SEC-03",
+            "SEC-03",
+            "SEC-03",
+            "SEC-01",
+            "SEC-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How can multiple teams safely share one cluster?",
+          "top": [
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are the main Kubernetes components?",
+          "top": [
+            "SHARED-02",
+            "SHARED-01",
+            "SHARED-02",
+            "SHARED-01",
+            "SHARED-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are namespaces used for?",
+          "top": [
+            "SHARED-05",
+            "SHARED-05",
+            "SHARED-05",
+            "SEC-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do clients discover the Kubernetes API and its OpenAPI schema?",
+          "top": [
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between an object's spec and status?",
+          "top": [
+            "SHARED-04",
+            "SHARED-04",
+            "APP-07",
+            "SHARED-04",
+            "APP-07"
+          ],
+          "first_relevant_rank": 1
+        }
+      ],
+      "good_boundary": null,
+      "poor_boundary": {
+        "doc": "APP-01",
+        "chunk": 1,
+        "end_of_chunk": "* A Deployment named `nginx-deployment` is created, indicated by the `.metadata.name` field. This name will become the basis for the Repli",
+        "start_of_next": "example: * A Deployment named `nginx-deployment` is created, indicated by the `.metadata.name` field. This name will become the basis for",
+        "next_heading_path": "Deployments > Creating a Deployment"
+      }
+    },
+    "recursive": {
+      "params": "1000 chars, 150 overlap, separators ## > ### > #### > blank line > line > sentence > word",
+      "structure": {
+        "chunks": 713,
+        "chunks_per_doc": 23.8,
+        "chars_avg": 806,
+        "chars_median": 856,
+        "chars_min": 94,
+        "chars_max": 1000,
+        "chars_stdev": 180,
+        "tokens_avg": 198,
+        "tokens_max": 443,
+        "pct_over_512_tokens": 0.0,
+        "pct_under_100_chars": 0.1,
+        "overlap_configured": 150,
+        "overlap_measured_avg": 34,
+        "pct_start_at_heading": 37.2,
+        "pct_heading_context_in_embedding": 37.2,
+        "pct_mixes_sections": 40.5,
+        "pct_orphan_heading": 8.4,
+        "pct_start_mid_sentence": 7.2,
+        "pct_end_mid_sentence": 8.0,
+        "pct_split_code_block": 2.1
+      },
+      "retrieval": {
+        "hit@1": 0.81,
+        "hit@5": 1.0,
+        "MRR@5": 0.883,
+        "precision@5": 0.695
+      },
+      "per_question": [
+        {
+          "q": "How does a Kubernetes Deployment manage application replicas?",
+          "top": [
+            "APP-02",
+            "APP-01",
+            "APP-02",
+            "APP-10",
+            "SHARED-04"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I roll back a Deployment to a previous revision?",
+          "top": [
+            "APP-01",
+            "APP-01",
+            "APP-03",
+            "APP-01",
+            "APP-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What guarantees does a StatefulSet provide about stable network identity and ordered deployment?",
+          "top": [
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I run a Job on a repeating schedule using cron syntax?",
+          "top": [
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What happens to a Pod if one of its init containers fails?",
+          "top": [
+            "APP-09",
+            "APP-09",
+            "APP-08",
+            "APP-09",
+            "APP-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How does the Horizontal Pod Autoscaler calculate the desired number of replicas?",
+          "top": [
+            "APP-02",
+            "APP-03",
+            "APP-10",
+            "APP-01",
+            "APP-10"
+          ],
+          "first_relevant_rank": 3
+        },
+        {
+          "q": "How do I make sure a copy of a Pod runs on every node?",
+          "top": [
+            "APP-07",
+            "APP-04",
+            "APP-08",
+            "APP-07",
+            "APP-07"
+          ],
+          "first_relevant_rank": 2
+        },
+        {
+          "q": "What are PersistentVolumes and PersistentVolumeClaims?",
+          "top": [
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-02",
+            "PLAT-01",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What does the reclaimPolicy of a StorageClass control?",
+          "top": [
+            "PLAT-03",
+            "PLAT-03",
+            "PLAT-01",
+            "SEC-05",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I take a point-in-time snapshot of a volume?",
+          "top": [
+            "PLAT-03",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05"
+          ],
+          "first_relevant_rank": 2
+        },
+        {
+          "q": "How can I clone an existing PersistentVolumeClaim?",
+          "top": [
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-09"
+          ],
+          "first_relevant_rank": 5
+        },
+        {
+          "q": "What is an emptyDir volume and when is it deleted?",
+          "top": [
+            "PLAT-02",
+            "PLAT-06",
+            "PLAT-01",
+            "APP-03",
+            "PLAT-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How are volumes provisioned automatically on demand?",
+          "top": [
+            "PLAT-04",
+            "PLAT-04",
+            "PLAT-01",
+            "PLAT-03",
+            "PLAT-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are recommended Kubernetes RBAC practices?",
+          "top": [
+            "SEC-01",
+            "SEC-04",
+            "SEC-01",
+            "SEC-05",
+            "SHARED-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between the privileged, baseline and restricted pod security profiles?",
+          "top": [
+            "SEC-02",
+            "SEC-02",
+            "SEC-04",
+            "SEC-02",
+            "SEC-02"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How should Secrets be protected, for example with encryption at rest and least-privilege access?",
+          "top": [
+            "SEC-03",
+            "SEC-01",
+            "SEC-01",
+            "SEC-03",
+            "SEC-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How can multiple teams safely share one cluster?",
+          "top": [
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are the main Kubernetes components?",
+          "top": [
+            "SHARED-02",
+            "SHARED-01",
+            "SHARED-02",
+            "SHARED-02",
+            "SHARED-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are namespaces used for?",
+          "top": [
+            "SHARED-05",
+            "SHARED-05",
+            "SEC-05",
+            "SHARED-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do clients discover the Kubernetes API and its OpenAPI schema?",
+          "top": [
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between an object's spec and status?",
+          "top": [
+            "SHARED-04",
+            "SHARED-04",
+            "SHARED-04",
+            "APP-07",
+            "SHARED-04"
+          ],
+          "first_relevant_rank": 1
+        }
+      ],
+      "good_boundary": {
+        "doc": "APP-01",
+        "chunk": 0,
+        "end_of_chunk": "manage ReplicaSets owned by a Deployment. Consider opening an issue in the main Kubernetes repository if your use case is not covered below.",
+        "start_of_next": "## Use Case The following are typical use cases for Deployments: * Create a Deployment to rollout a ReplicaSet. The ReplicaSet creates Pod",
+        "next_heading_path": "Deployments > Use Case"
+      },
+      "poor_boundary": {
+        "doc": "APP-01",
+        "chunk": 9,
+        "end_of_chunk": "is added to the ReplicaSet selector, Pod template labels, and in any existing Pods that the ReplicaSet might have. ## Updating a Deployment",
+        "start_of_next": "## Updating a Deployment **Note:** A Deployment's rollout is triggered if and only if the Deployment's Pod template (that is, `.spec.templa",
+        "next_heading_path": "Deployments > Updating a Deployment"
+      }
+    },
+    "markdown": {
+      "params": "split at every heading; sections > 1200 chars split recursively (100 overlap); sections < 200 chars merged forward; breadcrumb prepended for embedding",
+      "structure": {
+        "chunks": 755,
+        "chunks_per_doc": 25.2,
+        "chars_avg": 737,
+        "chars_median": 757,
+        "chars_min": 57,
+        "chars_max": 1199,
+        "chars_stdev": 317,
+        "tokens_avg": 192,
+        "tokens_max": 515,
+        "pct_over_512_tokens": 0.1,
+        "pct_under_100_chars": 0.7,
+        "overlap_configured": 100,
+        "overlap_measured_avg": 7,
+        "pct_start_at_heading": 62.9,
+        "pct_heading_context_in_embedding": 100.0,
+        "pct_mixes_sections": 8.2,
+        "pct_orphan_heading": 0.0,
+        "pct_start_mid_sentence": 3.7,
+        "pct_end_mid_sentence": 7.3,
+        "pct_split_code_block": 1.9
+      },
+      "retrieval": {
+        "hit@1": 0.905,
+        "hit@5": 0.952,
+        "MRR@5": 0.929,
+        "precision@5": 0.724
+      },
+      "per_question": [
+        {
+          "q": "How does a Kubernetes Deployment manage application replicas?",
+          "top": [
+            "APP-01",
+            "APP-01",
+            "APP-02",
+            "APP-10",
+            "APP-02"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I roll back a Deployment to a previous revision?",
+          "top": [
+            "APP-01",
+            "APP-01",
+            "APP-01",
+            "APP-01",
+            "APP-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What guarantees does a StatefulSet provide about stable network identity and ordered deployment?",
+          "top": [
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I run a Job on a repeating schedule using cron syntax?",
+          "top": [
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What happens to a Pod if one of its init containers fails?",
+          "top": [
+            "APP-09",
+            "APP-05",
+            "APP-08",
+            "APP-09",
+            "APP-08"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How does the Horizontal Pod Autoscaler calculate the desired number of replicas?",
+          "top": [
+            "APP-10",
+            "APP-10",
+            "APP-10",
+            "APP-02",
+            "APP-10"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I make sure a copy of a Pod runs on every node?",
+          "top": [
+            "APP-07",
+            "APP-04",
+            "APP-04",
+            "APP-07",
+            "SHARED-02"
+          ],
+          "first_relevant_rank": 2
+        },
+        {
+          "q": "What are PersistentVolumes and PersistentVolumeClaims?",
+          "top": [
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-02",
+            "APP-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What does the reclaimPolicy of a StorageClass control?",
+          "top": [
+            "PLAT-03",
+            "PLAT-03",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I take a point-in-time snapshot of a volume?",
+          "top": [
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How can I clone an existing PersistentVolumeClaim?",
+          "top": [
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": null
+        },
+        {
+          "q": "What is an emptyDir volume and when is it deleted?",
+          "top": [
+            "PLAT-02",
+            "PLAT-03",
+            "PLAT-06",
+            "PLAT-01",
+            "PLAT-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How are volumes provisioned automatically on demand?",
+          "top": [
+            "PLAT-04",
+            "PLAT-04",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are recommended Kubernetes RBAC practices?",
+          "top": [
+            "SEC-01",
+            "SEC-04",
+            "SEC-03",
+            "SEC-01",
+            "SEC-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between the privileged, baseline and restricted pod security profiles?",
+          "top": [
+            "SEC-02",
+            "SEC-02",
+            "SEC-02",
+            "SEC-04",
+            "SEC-02"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How should Secrets be protected, for example with encryption at rest and least-privilege access?",
+          "top": [
+            "SEC-03",
+            "SEC-03",
+            "SEC-03",
+            "SEC-01",
+            "SEC-04"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How can multiple teams safely share one cluster?",
+          "top": [
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are the main Kubernetes components?",
+          "top": [
+            "SHARED-02",
+            "SHARED-01",
+            "SHARED-02",
+            "SHARED-02",
+            "SHARED-04"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are namespaces used for?",
+          "top": [
+            "SHARED-05",
+            "SHARED-05",
+            "SHARED-05",
+            "SHARED-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do clients discover the Kubernetes API and its OpenAPI schema?",
+          "top": [
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between an object's spec and status?",
+          "top": [
+            "SHARED-04",
+            "SHARED-04",
+            "SHARED-04",
+            "APP-07",
+            "APP-08"
+          ],
+          "first_relevant_rank": 1
+        }
+      ],
+      "good_boundary": {
+        "doc": "APP-01",
+        "chunk": 0,
+        "end_of_chunk": "manage ReplicaSets owned by a Deployment. Consider opening an issue in the main Kubernetes repository if your use case is not covered below.",
+        "start_of_next": "## Use Case The following are typical use cases for Deployments: * Create a Deployment to rollout a ReplicaSet. The ReplicaSet creates Pod",
+        "next_heading_path": "Deployments > Use Case"
+      },
+      "poor_boundary": {
+        "doc": "APP-01",
+        "chunk": 12,
+        "end_of_chunk": "es.io/revision=2 Selector: app=nginx Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable",
+        "start_of_next": "Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable StrategyType: RollingUpdate MinReadySeco",
+        "next_heading_path": "Deployments > Updating a Deployment"
+      }
+    },
+    "semantic": {
+      "params": "sentence/list/code units, window +/-1, break at > p85 cosine distance, min 300 / max 1200 chars",
+      "structure": {
+        "chunks": 684,
+        "chunks_per_doc": 22.8,
+        "chars_avg": 806,
+        "chars_median": 863,
+        "chars_min": 23,
+        "chars_max": 1200,
+        "chars_stdev": 320,
+        "tokens_avg": 197,
+        "tokens_max": 534,
+        "pct_over_512_tokens": 0.1,
+        "pct_under_100_chars": 1.2,
+        "overlap_configured": 0,
+        "overlap_measured_avg": 0,
+        "pct_start_at_heading": 10.4,
+        "pct_heading_context_in_embedding": 10.4,
+        "pct_mixes_sections": 49.6,
+        "pct_orphan_heading": 0.0,
+        "pct_start_mid_sentence": 3.2,
+        "pct_end_mid_sentence": 4.7,
+        "pct_split_code_block": 1.5
+      },
+      "retrieval": {
+        "hit@1": 0.905,
+        "hit@5": 0.952,
+        "MRR@5": 0.929,
+        "precision@5": 0.724
+      },
+      "per_question": [
+        {
+          "q": "How does a Kubernetes Deployment manage application replicas?",
+          "top": [
+            "APP-02",
+            "APP-01",
+            "APP-02",
+            "APP-02",
+            "APP-10"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I roll back a Deployment to a previous revision?",
+          "top": [
+            "APP-01",
+            "APP-01",
+            "APP-01",
+            "APP-01",
+            "APP-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What guarantees does a StatefulSet provide about stable network identity and ordered deployment?",
+          "top": [
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03",
+            "APP-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I run a Job on a repeating schedule using cron syntax?",
+          "top": [
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06",
+            "APP-06"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What happens to a Pod if one of its init containers fails?",
+          "top": [
+            "APP-09",
+            "APP-08",
+            "APP-05",
+            "APP-09",
+            "APP-09"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How does the Horizontal Pod Autoscaler calculate the desired number of replicas?",
+          "top": [
+            "APP-10",
+            "APP-02",
+            "APP-10",
+            "APP-10",
+            "APP-10"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I make sure a copy of a Pod runs on every node?",
+          "top": [
+            "APP-04",
+            "APP-07",
+            "APP-07",
+            "APP-08",
+            "APP-07"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are PersistentVolumes and PersistentVolumeClaims?",
+          "top": [
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-05",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What does the reclaimPolicy of a StorageClass control?",
+          "top": [
+            "PLAT-03",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-03",
+            "PLAT-04"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do I take a point-in-time snapshot of a volume?",
+          "top": [
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05",
+            "PLAT-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How can I clone an existing PersistentVolumeClaim?",
+          "top": [
+            "PLAT-01",
+            "PLAT-05",
+            "PLAT-01",
+            "PLAT-01",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": null
+        },
+        {
+          "q": "What is an emptyDir volume and when is it deleted?",
+          "top": [
+            "PLAT-03",
+            "PLAT-06",
+            "PLAT-02",
+            "PLAT-05",
+            "PLAT-01"
+          ],
+          "first_relevant_rank": 2
+        },
+        {
+          "q": "How are volumes provisioned automatically on demand?",
+          "top": [
+            "PLAT-04",
+            "PLAT-03",
+            "PLAT-01",
+            "PLAT-04",
+            "PLAT-04"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are recommended Kubernetes RBAC practices?",
+          "top": [
+            "SEC-01",
+            "SEC-04",
+            "SEC-05",
+            "SEC-01",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between the privileged, baseline and restricted pod security profiles?",
+          "top": [
+            "SEC-02",
+            "SEC-02",
+            "SEC-02",
+            "SEC-04",
+            "SEC-02"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How should Secrets be protected, for example with encryption at rest and least-privilege access?",
+          "top": [
+            "SEC-04",
+            "SEC-03",
+            "SEC-01",
+            "SEC-03",
+            "SEC-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How can multiple teams safely share one cluster?",
+          "top": [
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are the main Kubernetes components?",
+          "top": [
+            "SHARED-02",
+            "SHARED-04",
+            "SHARED-01",
+            "SHARED-01",
+            "SHARED-01"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What are namespaces used for?",
+          "top": [
+            "SHARED-05",
+            "SHARED-05",
+            "SEC-05",
+            "SHARED-05",
+            "SEC-05"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "How do clients discover the Kubernetes API and its OpenAPI schema?",
+          "top": [
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03",
+            "SHARED-03"
+          ],
+          "first_relevant_rank": 1
+        },
+        {
+          "q": "What is the difference between an object's spec and status?",
+          "top": [
+            "SHARED-04",
+            "SHARED-04",
+            "APP-07",
+            "APP-07",
+            "SHARED-04"
+          ],
+          "first_relevant_rank": 1
+        }
+      ],
+      "good_boundary": {
+        "doc": "APP-01",
+        "chunk": 1,
+        "end_of_chunk": "lout. * Use the status of the Deployment as an indicator that a rollout has stuck. * Clean up older ReplicaSets that you don't need anymore.",
+        "start_of_next": "## Creating a Deployment The following is an example of a Deployment. It creates a ReplicaSet to bring up three `nginx` Pods: `[code sampl",
+        "next_heading_path": "Deployments > Creating a Deployment"
+      },
+      "poor_boundary": {
+        "doc": "APP-01",
+        "chunk": 15,
+        "end_of_chunk": "icaSet: nginx-deployment-1564180365 (3/3 replicas created) Events: Type Reason Age From Messa",
+        "start_of_next": "ge ---- ------ ---- ---- ------- Normal ScalingReplicaSet 2m deployment-controller Scale",
+        "next_heading_path": "Deployments > Updating a Deployment"
+      }
+    }
+  }
+}

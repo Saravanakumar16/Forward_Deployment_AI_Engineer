@@ -1,0 +1,64 @@
+# Exercise E evidence - 2026-11-28T01:11:46
+# strategy=markdown embedder=BAAI/bge-small-en-v1.5 target=SEC-01 question='What are recommended Kubernetes RBAC practices?'
+
+## 1. Authorized vs unauthorized access to the same restricted document
+PASS  Meena (SECURITY_ENG) retrieves SEC-01 in top-5 => True   (SEC-01, SEC-04, SEC-03, SEC-01, SEC-01)
+PASS  Divya (APP_ENG+SECURITY_ENG) retrieves SEC-01 in top-5 => True
+PASS  Arjun (PLATFORM_ENG) gets no SEC-* chunk in top-5 => False   (SHARED-01, SHARED-01, SHARED-01, SHARED-01, SHARED-01)
+PASS  Priya (APP_ENG) gets no SEC-* chunk in top-5 => False
+PASS  Arjun direct SELECT on SEC-01 chunks returns 0 rows => 0
+PASS  Arjun cannot even see the title of SEC-01 => None
+PASS  Meena sees SEC-01 title => Role Based Access Control Good Practices
+PASS  Priya blocked from PLAT-01 (storage) => 0
+PASS  Arjun reads PLAT-01 (storage) => True
+PASS  Meena blocked from APP-01 (workloads) => 0
+PASS  Priya reads SHARED-02 (all employees) => True
+PASS  Arjun reads SHARED-02 (all employees) => True
+PASS  Meena reads SHARED-02 (all employees) => True
+PASS  Divya reads SHARED-02 (all employees) => True
+
+## 2. Unknown, missing and forged identity context
+PASS  Unknown identity 'mallory' sees 0 restricted chunks => 0
+PASS  Unknown identity 'mallory' sees 0 shared chunks => 0
+PASS  No app.user_id set -> 0 chunks => 0
+PASS  Empty app.user_id -> 0 chunks => 0
+PASS  Valid user but no tenant set -> 0 chunks => 0
+PASS  Valid user with wrong tenant -> 0 chunks => 0
+PASS  Unknown identity search returns nothing => 0
+PASS  Identity does not leak to the next transaction on a pooled connection => (True, 0)
+
+## 3. Revocation takes effect immediately, without re-embedding or re-ingesting
+INFO  chunk table fingerprint before: rows=2814 max_id=5628 md5(embeddings)=46ce245be7f39922c0f732adf35df86e
+PASS  Meena sees 0 SEC-01 chunks right after revocation => 0   (revoke + query in 14 ms)
+PASS  Meena's RBAC search now returns no SEC-* chunk => False   (SHARED-01, SHARED-01, SHARED-01, SHARED-01, SHARED-01)
+PASS  Meena still reads shared SHARED-02 (ALL_EMPLOYEES kept) => True
+PASS  Divya (other SECURITY_ENG member) unaffected => True
+PASS  Chunk table unchanged (no re-embedding / re-ingestion) => (2814, 5628, '46ce245be7f39922c0f732adf35df86e')
+INFO  membership meena -> SECURITY_ENG restored
+
+## 4. Restoring the legitimate membership restores access
+PASS  Meena sees SEC-01 chunks again => True
+PASS  Meena's RBAC search returns SEC-01 again => True
+
+## 5. Deactivating an identity (leaver) removes all access, including shared
+PASS  Deactivated Arjun sees 0 shared chunks => 0
+PASS  Reactivated Arjun reads SHARED-02 again => True
+
+## 6. The retrieval role cannot read or change the authorization data
+PASS  SELECT raglab.document_acl refused => InsufficientPrivilege
+PASS  SELECT raglab.user_groups refused => InsufficientPrivilege
+PASS  SELECT raglab.app_users refused => InsufficientPrivilege
+PASS  SELECT raglab.groups refused => InsufficientPrivilege
+PASS  Self-grant INSERT INTO user_groups refused => InsufficientPrivilege
+PASS  UPDATE chunks refused => InsufficientPrivilege
+PASS  DELETE chunks refused => InsufficientPrivilege
+PASS  ALTER TABLE ... DISABLE ROW LEVEL SECURITY refused => InsufficientPrivilege
+PASS  DROP POLICY refused => InsufficientPrivilege
+PASS  SET row_security=off cannot bypass RLS => InsufficientPrivilege
+
+## 7. Documented trust boundary (informational)
+INFO  The database trusts app.user_id from whoever holds the retrieval-role password. That is why the
+INFO  password lives only in the trusted backend, which sets app.user_id from a verified token. Users never
+INFO  get database credentials; --user in search.py is a local demo stand-in for that verified identity.
+
+ALL CHECKS PASSED

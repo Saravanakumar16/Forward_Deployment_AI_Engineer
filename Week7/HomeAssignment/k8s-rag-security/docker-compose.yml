@@ -1,0 +1,19 @@
+# OPTIONAL: run only if you do not already have PostgreSQL with pgvector.
+# Local-only credentials; change them and keep .env in sync.
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: fde
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:-change_me_locally}
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - k8s_raglab_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fde -d postgres"]
+      interval: 3s
+      retries: 20
+volumes:
+  k8s_raglab_pgdata:

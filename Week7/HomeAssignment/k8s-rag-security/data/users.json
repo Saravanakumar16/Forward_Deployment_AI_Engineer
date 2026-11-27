@@ -1,0 +1,14 @@
+{
+  "groups": {
+    "APP_ENG": "Application Engineering",
+    "PLATFORM_ENG": "Platform Engineering",
+    "SECURITY_ENG": "Security Engineering",
+    "ALL_EMPLOYEES": "Every employee (shared knowledge)"
+  },
+  "users": [
+    {"user_id": "priya", "display_name": "Priya", "groups": ["APP_ENG", "ALL_EMPLOYEES"]},
+    {"user_id": "arjun", "display_name": "Arjun", "groups": ["PLATFORM_ENG", "ALL_EMPLOYEES"]},
+    {"user_id": "meena", "display_name": "Meena", "groups": ["SECURITY_ENG", "ALL_EMPLOYEES"]},
+    {"user_id": "divya", "display_name": "Divya", "groups": ["APP_ENG", "SECURITY_ENG", "ALL_EMPLOYEES"]}
+  ]
+}

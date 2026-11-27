@@ -1,0 +1,882 @@
+[
+  {
+    "question": "How does a Kubernetes Deployment manage application replicas?",
+    "area": "Application Engineering",
+    "unrestricted_top": [
+      [
+        "APP-01",
+        "restricted",
+        0.1563
+      ],
+      [
+        "APP-01",
+        "restricted",
+        0.1751
+      ],
+      [
+        "APP-02",
+        "restricted",
+        0.1945
+      ],
+      [
+        "APP-10",
+        "restricted",
+        0.1988
+      ],
+      [
+        "APP-02",
+        "restricted",
+        0.205
+      ]
+    ],
+    "by_user": {
+      "priya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "APP-01",
+            "heading": "Deployments",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/",
+            "distance": 0.1563,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "APP-01",
+            "heading": "Deployments > Writing a Deployment Spec > Replicas",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/",
+            "distance": 0.1751,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "APP-02",
+            "heading": "ReplicaSet > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/",
+            "distance": 0.1945,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "APP-10",
+            "heading": "Horizontal Pod Autoscaling > Autoscaling during rolling update",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/",
+            "distance": 0.1988,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "APP-02",
+            "heading": "ReplicaSet > Alternatives to ReplicaSet",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/",
+            "distance": 0.205,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      },
+      "arjun": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Historical context for Kubernetes",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2164,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-04",
+            "heading": "Objects In Kubernetes > Understanding Kubernetes objects > Object spec and status",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/",
+            "distance": 0.2165,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2167,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.227,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "PLAT-01",
+            "heading": "Persistent Volumes",
+            "source_url": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/",
+            "distance": 0.2367,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "APP-01",
+          "APP-02",
+          "APP-10"
+        ]
+      },
+      "meena": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Historical context for Kubernetes",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2164,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-04",
+            "heading": "Objects In Kubernetes > Understanding Kubernetes objects > Object spec and status",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/",
+            "distance": 0.2165,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2167,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.227,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2385,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "APP-01",
+          "APP-02",
+          "APP-10"
+        ]
+      },
+      "divya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "APP-01",
+            "heading": "Deployments",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/",
+            "distance": 0.1563,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "APP-01",
+            "heading": "Deployments > Writing a Deployment Spec > Replicas",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/",
+            "distance": 0.1751,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "APP-02",
+            "heading": "ReplicaSet > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/",
+            "distance": 0.1945,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "APP-10",
+            "heading": "Horizontal Pod Autoscaling > Autoscaling during rolling update",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/",
+            "distance": 0.1988,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "APP-02",
+            "heading": "ReplicaSet > Alternatives to ReplicaSet",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/",
+            "distance": 0.205,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      }
+    }
+  },
+  {
+    "question": "What are PersistentVolumes and PersistentVolumeClaims?",
+    "area": "Platform Engineering",
+    "unrestricted_top": [
+      [
+        "PLAT-01",
+        "restricted",
+        0.1633
+      ],
+      [
+        "PLAT-01",
+        "restricted",
+        0.2116
+      ],
+      [
+        "PLAT-01",
+        "restricted",
+        0.2131
+      ],
+      [
+        "PLAT-02",
+        "restricted",
+        0.219
+      ],
+      [
+        "APP-03",
+        "restricted",
+        0.2278
+      ]
+    ],
+    "by_user": {
+      "priya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > Pod Identity > Stable Storage",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.2278,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > Components > Volume Claim Templates",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.2485,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > Revision history > Managing Revision History > Best Practices > Avoid",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.3046,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > Revision history > Managing Revision History > Best Practices > Avoid",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.3299,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > PersistentVolumeClaim retention > Replicas",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.3404,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "PLAT-01",
+          "PLAT-02"
+        ]
+      },
+      "arjun": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "PLAT-01",
+            "heading": "Persistent Volumes",
+            "source_url": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/",
+            "distance": 0.1633,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "PLAT-01",
+            "heading": "Persistent Volumes > PersistentVolumeClaims",
+            "source_url": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/",
+            "distance": 0.2116,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "PLAT-01",
+            "heading": "Persistent Volumes",
+            "source_url": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/",
+            "distance": 0.2131,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "PLAT-02",
+            "heading": "Volumes > Types of volumes > Volumes that use a PersistentVolumeClaim",
+            "source_url": "https://kubernetes.io/docs/concepts/storage/volumes/",
+            "distance": 0.219,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "PLAT-05",
+            "heading": "Volume Snapshots > Lifecycle of a volume snapshot and volume snapshot content > Persistent Volume Claim as Snapshot Source Protection",
+            "source_url": "https://kubernetes.io/docs/concepts/storage/volume-snapshots/",
+            "distance": 0.2302,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "APP-03"
+        ]
+      },
+      "meena": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SEC-05",
+            "heading": "Multi-tenancy > Data Plane Isolation > Storage isolation",
+            "source_url": "https://kubernetes.io/docs/concepts/security/multi-tenancy/",
+            "distance": 0.2919,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices > Kubernetes RBAC - privilege escalation risks > Persistent volume creation",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.2983,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-03",
+            "heading": "The Kubernetes API > Persistence",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/kubernetes-api/",
+            "distance": 0.3693,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-03",
+            "heading": "The Kubernetes API > Persistence",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/kubernetes-api/",
+            "distance": 0.3989,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SEC-04",
+            "heading": "Security Checklist > Admission controllers",
+            "source_url": "https://kubernetes.io/docs/concepts/security/security-checklist/",
+            "distance": 0.4121,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "PLAT-01",
+          "PLAT-02",
+          "APP-03"
+        ]
+      },
+      "divya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > Pod Identity > Stable Storage",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.2278,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > Components > Volume Claim Templates",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.2485,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SEC-05",
+            "heading": "Multi-tenancy > Data Plane Isolation > Storage isolation",
+            "source_url": "https://kubernetes.io/docs/concepts/security/multi-tenancy/",
+            "distance": 0.2919,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices > Kubernetes RBAC - privilege escalation risks > Persistent volume creation",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.2983,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "APP-03",
+            "heading": "StatefulSets > Revision history > Managing Revision History > Best Practices > Avoid",
+            "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/",
+            "distance": 0.3046,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "PLAT-01",
+          "PLAT-02"
+        ]
+      }
+    }
+  },
+  {
+    "question": "What are recommended Kubernetes RBAC practices?",
+    "area": "Security Engineering",
+    "unrestricted_top": [
+      [
+        "SEC-01",
+        "restricted",
+        0.142
+      ],
+      [
+        "SEC-04",
+        "restricted",
+        0.1845
+      ],
+      [
+        "SEC-03",
+        "restricted",
+        0.2144
+      ],
+      [
+        "SEC-01",
+        "restricted",
+        0.2435
+      ],
+      [
+        "SEC-01",
+        "restricted",
+        0.2494
+      ]
+    ],
+    "by_user": {
+      "priya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2872,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Historical context for Kubernetes",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2874,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-01",
+            "heading": "Overview > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2885,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Historical context for Kubernetes",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2888,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.293,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "SEC-01",
+          "SEC-04",
+          "SEC-03"
+        ]
+      },
+      "arjun": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2872,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Historical context for Kubernetes",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2874,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-01",
+            "heading": "Overview > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2885,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Historical context for Kubernetes",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.2888,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SHARED-01",
+            "heading": "Overview > Why you need Kubernetes and what it can do",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.293,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": [
+          "SEC-01",
+          "SEC-04",
+          "SEC-03"
+        ]
+      },
+      "meena": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.142,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SEC-04",
+            "heading": "Security Checklist > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/security/security-checklist/",
+            "distance": 0.1845,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SEC-03",
+            "heading": "Good practices for Kubernetes Secrets > Cluster administrators > Configure least-privilege access to Secrets",
+            "source_url": "https://kubernetes.io/docs/concepts/security/secrets-good-practices/",
+            "distance": 0.2144,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices > Kubernetes RBAC - privilege escalation risks",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.2435,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices > General good practice > Periodic review",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.2494,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      },
+      "divya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.142,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SEC-04",
+            "heading": "Security Checklist > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/security/security-checklist/",
+            "distance": 0.1845,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SEC-03",
+            "heading": "Good practices for Kubernetes Secrets > Cluster administrators > Configure least-privilege access to Secrets",
+            "source_url": "https://kubernetes.io/docs/concepts/security/secrets-good-practices/",
+            "distance": 0.2144,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices > Kubernetes RBAC - privilege escalation risks",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.2435,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SEC-01",
+            "heading": "Role Based Access Control Good Practices > General good practice > Periodic review",
+            "source_url": "https://kubernetes.io/docs/concepts/security/rbac-good-practices/",
+            "distance": 0.2494,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      }
+    }
+  },
+  {
+    "question": "What are the main Kubernetes components?",
+    "area": "Shared knowledge",
+    "unrestricted_top": [
+      [
+        "SHARED-02",
+        "shared",
+        0.1383
+      ],
+      [
+        "SHARED-01",
+        "shared",
+        0.1764
+      ],
+      [
+        "SHARED-02",
+        "shared",
+        0.1885
+      ],
+      [
+        "SHARED-02",
+        "shared",
+        0.2098
+      ],
+      [
+        "SHARED-04",
+        "shared",
+        0.2119
+      ]
+    ],
+    "by_user": {
+      "priya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1383,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-01",
+            "heading": "Overview > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.1764,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Core Components > Control Plane Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1885,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Flexibility in Architecture",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.2098,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SHARED-04",
+            "heading": "Objects In Kubernetes > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/",
+            "distance": 0.2119,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      },
+      "arjun": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1383,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-01",
+            "heading": "Overview > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.1764,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Core Components > Control Plane Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1885,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Flexibility in Architecture",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.2098,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SHARED-04",
+            "heading": "Objects In Kubernetes > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/",
+            "distance": 0.2119,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      },
+      "meena": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1383,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-01",
+            "heading": "Overview > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.1764,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Core Components > Control Plane Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1885,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Flexibility in Architecture",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.2098,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SHARED-04",
+            "heading": "Objects In Kubernetes > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/",
+            "distance": 0.2119,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      },
+      "divya": {
+        "results": [
+          {
+            "rank": 1,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1383,
+            "authorized": true
+          },
+          {
+            "rank": 2,
+            "document_id": "SHARED-01",
+            "heading": "Overview > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/",
+            "distance": 0.1764,
+            "authorized": true
+          },
+          {
+            "rank": 3,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Core Components > Control Plane Components",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.1885,
+            "authorized": true
+          },
+          {
+            "rank": 4,
+            "document_id": "SHARED-02",
+            "heading": "Kubernetes Components > Flexibility in Architecture",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/components/",
+            "distance": 0.2098,
+            "authorized": true
+          },
+          {
+            "rank": 5,
+            "document_id": "SHARED-04",
+            "heading": "Objects In Kubernetes > What's next",
+            "source_url": "https://kubernetes.io/docs/concepts/overview/working-with-objects/",
+            "distance": 0.2119,
+            "authorized": true
+          }
+        ],
+        "withheld_relevant_docs": []
+      }
+    }
+  }
+]
